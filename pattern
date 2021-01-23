@@ -1,0 +1,19 @@
+trigger starpattern on Pattern__c (before insert) {
+    Integer i,j;
+    String pattern = '';
+    List<Pattern__c> patlist = new List<Pattern__c>();
+   
+        for(Pattern__c p:trigger.new){
+            for(i=1;i<=p.No_of_Rows__c;i++){
+                for(j=1;j<=i;j++){
+                    pattern+='*';
+                   }
+                pattern+='\n';
+         
+            }
+           
+            System.debug('pattern: \n' + pattern);
+            p.Pattern__c=pattern;
+            patlist.add(p);
+        }
+  }
