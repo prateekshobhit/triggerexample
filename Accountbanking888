@@ -1,0 +1,18 @@
+
+/*
+When ever new Account is inserted  with Industry as 'Banking ' then set the phone
+   as '888'
+*/
+trigger accountrevenueOpp on Account (before insert) {
+    list<Opportunity> Opplist = new list<Opportunity>();
+    list<Account> banknum = new list<Account>();
+    for(Account acc: Trigger.new){
+        if(acc.Industry=='Banking'){
+        	acc.Phone='888';
+            banknum.add(acc);
+        }
+        
+        
+    }
+    
+}
