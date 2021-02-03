@@ -1,0 +1,18 @@
+trigger accountrevenueOpp on Account (after insert) {
+    list<Opportunity> Opplist = new list<Opportunity>();
+    for(Account acc: Trigger.new){
+        if(acc.AnnualRevenue>5000000 && acc.Industry=='Energy'){
+            Opportunity op = new Opportunity();
+            op.Name = acc.Name;
+            op.StageName = 'Prospecting';
+            op.CloseDate =  date.today()+30;
+            op.AccountId = acc.id;
+            Opplist.add(op);
+        }
+        
+        
+    }
+    insert Opplist;
+    
+}
+
