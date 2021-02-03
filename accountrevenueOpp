@@ -1,3 +1,12 @@
+/*
+Whenever new Account is created with  AnnualRevenue  more than 50 Lacs and Industry as Energy  then create a new opportunity for this account with
+  OpportunityName as AccountName
+  StageName as Prospecting
+  CloseDate as Today+30 days
+
+*/
+
+
 trigger accountrevenueOpp on Account (after insert) {
     list<Opportunity> Opplist = new list<Opportunity>();
     for(Account acc: Trigger.new){
