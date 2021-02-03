@@ -1,0 +1,25 @@
+/*
+ When ever new lead is created , calculate the leadscore using below criteria:
+Field Name    IF NOT NULL     IF NULL
+Email                      10                     0
+Phone                      10                     0
+Industry                   20                     0
+Note : First Create a custom field LeadScore on Lead object
+
+
+*/
+
+trigger leadscore on Lead (Before insert){
+    for(Integer i=0; i< trigger.size; i++){
+        Integer score = 0;
+        
+        if(Trigger.new[i].Email <> null)
+            score += 10;
+        if(Trigger.new[i].Phone <> null)
+            score += 10;
+        if(Trigger.new[i].Industry  <> null)
+            score += 20;
+        
+        Trigger.new[i].LeadScore__c  = score;
+    }
+}
